@@ -63,8 +63,11 @@ const daysInThisMonth = function () {
 };
 
 const changeDayNumber = function (num) {
+  // prendo lo span del numero di giorno
   const dayNumberSpan = document.getElementById("newMeetingDay");
+  // e gli modifico il testo col numero ricevuto come parametro (vedi momento dell'esecuzione di changeDayNumber)
   dayNumberSpan.innerText = num;
+  // si aggiunge anche una classe allo span per renderlo più gradevole graficamente
   dayNumberSpan.classList.add("hasDay");
 };
 
@@ -120,21 +123,27 @@ const createDays = function (numOfDays) {
 
 const showAppointments = function (index) {
   const appointmentsContainer = document.getElementById("appointments");
+  // uso l'index ricevuto per andare a prendermi l'array del giorno selezionato dall'array appointments
+  // ricevo quindi l'array del giorno con i suoi appuntamenti, oppure vuoto
   const appointmentsOnSelectedDay = appointments[index];
 
+  // prendo la lista dove inserire i nuovi <li>
   const ul = document.getElementById("appointmentsList");
   ul.innerHTML = ""; // svuotiamo la lista per evitare ripetizioni PRIMA di ciclare con il forEach
 
+  // se il giorno contiene degli appuntamenti
   if (appointmentsOnSelectedDay.length > 0) {
+    // allora li cicliamo e generiamo tanti <li> quante sono le stringhe presenti in quell'array
     appointmentsOnSelectedDay.forEach(appointmentStr => {
       const li = document.createElement("li");
       li.innerText = appointmentStr; // inserisco la stringa trovata nell'array nell'li appena generato
 
       ul.appendChild(li);
     });
-
+    // e rendiamo la sezione visibile
     appointmentsContainer.style.display = "block";
   } else {
+    // altrimenti la sezione viene nascosta, nel caso in cui l'array di appuntamenti sia vuoto
     appointmentsContainer.style.display = "none";
   }
 };
